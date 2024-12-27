@@ -37,7 +37,15 @@ const isValid = (coordinates) => {
 };
 
 const knightMoves = (start, end) => {
-  if (!isValid(start) || !isValid(end)) return "Invalid coordinates";
+  if (!isValid(start) || !isValid(end)) {
+    console.log("Invalid coordinates.");
+    return;
+  }
+
+  if (start[0] === end[0] && start[1] === end[1]) {
+    console.log("Starting coordinates match. 0 moves required.");
+    return;
+  }
 
   const findShortestPath = (start, end) => {
     const queue = [new Node(start, [start])]; // Path becomes array, with start coordinates as first item.
@@ -69,10 +77,10 @@ const knightMoves = (start, end) => {
   };
 
   const shortestPath = findShortestPath(start, end);
-  const steps = shortestPath.length;
+  const steps = shortestPath.length - 1;
 
   console.log(`You made it in ${steps} moves! Here's your path:`);
   shortestPath.forEach((step) => console.log(step));
 };
 
-knightMoves([3, 3], [4, 3]);
+knightMoves([3, 5], [6, 1]);
